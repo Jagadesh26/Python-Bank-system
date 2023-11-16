@@ -1,0 +1,183 @@
+import sys
+import matplotlib.pyplot as p1
+import numpy as np
+import pandas as pd
+from datetime import date as dt
+import datetime as tt
+print('                             The JS Bank')
+print('                          Welcom to js bank')
+print('----------------------------------------------------------')
+print('login')
+print(" ")
+accno=input('enter the account no: ')
+uname=input('enter the username: ')
+password=input('enter the password no: ')
+opt_com=np.random.randint(1000,10000)
+print('The OPT is : ',opt_com)
+opt=int(input('enter the OPT: '))
+lis_loan_pay_date=[]
+loan_bal_lis=[]
+loan_pay_lis=[]
+dc_bal_lis=[]
+dc_lis=[]
+lis_date=[]
+tran_lis=[]
+loan=10000
+if (opt==opt_com) and (accno.isdigit()) and (uname.isalpha()) and (password.isdigit()) and (len(accno)==10) and (len(password)==4):
+
+    print('-----------------------------------------------------------')
+    print('                  WELCOME TO OUR BANK {}                    '.format(uname))
+    bal=10000
+    while True:
+        print("to see the acc balance -- enter 1")
+        print('to see the loan balance -- enter 2')
+        print('to the passbook sb acc -- enter 3')
+        print('bank transfer -- enter 4')
+        print('money tranfer by upi id -- enter 5')
+        print('mobile recharge -- enter 6')
+        print('to exit want logout -- enter 7')
+        print(" ")
+        opt=int(input('enter the option service no : '))
+        if opt==1:
+            print('the account no is : {} '.format(accno))
+            print('the name is : {} '.format(uname))
+            print('the account balance is : {} '.format(bal))
+            print('------------------------------------------------------')
+        elif opt==2:
+            loan_pay=int(input('enter the loan payment'))
+            loan=loan-loan_pay
+            loan_pay_date=dt.today()
+            loan_pay_date
+            lis_loan_pay_date.append(loan_pay_date)
+            loan_bal_lis.append(loan)
+            loan_pay_lis.append(loan_pay)
+            loan_lis={'Date':lis_loan_pay_date,'Loan Payment':loan_pay_lis,'Remain loan ammount':loan_bal_lis}
+            loan_table=pd.DataFrame(loan_lis)
+            print('the account no is : {} '.format(accno))
+            print('the name is : {} '.format(uname))
+            print('the loan remain balance : {}'.format(loan))
+            print(" ")
+            print(" ")
+            print(loan_table)
+            print(" ")
+            print(" ")
+            if loan==0:
+                print('your loan is compeletly finished')
+            else:
+                print('your want to pay remain ammount: ',loan)
+            print(" ")
+            print("The graph for loan")
+            print("""You want pie graph = enter 1
+                     
+            you want bar graph = enter 2""")
+            optt=int(input('Enter the graph option '))
+            if optt==1:
+                loanl=[loan_pay,loan]
+                label_loan=['loan payment','remain loan ammount']
+                loan_gra=p1.pie(loanl,labels=label_loan,autopct='%2.2f%%',explode=[0,0.3])
+                loan_gra
+            elif optt==2:
+                loan1=[loan_pay,loan]
+                label_loan1=['loan payment','remain loan ammount']
+                loan_gra1=p1.bar(label_loan1,loan1,color=['b','r'],width=[0.3,0.3])
+                loan_gra1
+            else:
+                print('Thank you')
+                print(' ')
+            print('------------------------------------------------------')
+        elif opt==3:
+            date=date=dt.today()
+            print(" ")
+            print('you want debit option = enter 1')
+            print('you want cerdit option = enter 2 ')
+            optt=int(input('enter the option for debit or cerdit: '))
+            if optt==1:
+                debit=int(input('enter the debit ammount : '))
+                bal=bal+debit
+                a=('Debit - {} '.format(debit))
+                dc_lis.append(a)
+                print('debit : {}'.format(debit))
+            elif optt==2:
+                cerdit=int(input('enter the cerdit ammount: '))
+                bal=bal-cerdit
+                b=('Cerdit - {} '.format(cerdit))
+                dc_lis.append(b)
+                print('cerdit : {}'.format(cerdit))
+            else:
+                print('your enter the worng option')
+            print('the account no is : {} '.format(accno))
+            print('the name is : {} '.format(uname))
+            tran=np.random.randint(100000000,1000000000)
+            ttran=('ID - {}'.format(tran))
+            tran_lis.append(ttran)
+            dc_bal_lis.append(bal)
+            lis_date.append(date)
+            bal_lis={'Date':lis_date,'Transaction_id':tran_lis,'debit or cerdit':dc_lis,'balance ammount':dc_bal_lis}
+            l_table=pd.DataFrame(bal_lis)
+            print(l_table)
+            print(" ")
+            print('------------------------------------------------------')
+        elif opt==4:
+            send_time=tt.datetime.today()
+            send_accno=input('enter the account no: ')
+            send_accno_again=input('enter the account no again: ')
+            send_uname=input('enter the username: ')
+            send_ifc=input('enter the ifc code')
+            branch=input('enter the bank branch')
+            amount=int(input('enter the ammount: '))
+            t_opt=np.random.randint(1000,10000)
+            print("Your OPT is : ",t_opt)
+            OPT=int(input('Enter the OPT '))
+            print("")
+            if (send_accno==send_accno_again) and (OPT==t_opt) and (len(send_accno)==10) and (send_uname.isalpha()) and (len(send_ifc)==10) and (branch.isalpha()):
+                print("""your tranction amount : """,amount)
+                print("""sended in : """,send_time)
+                print('your tranction is sucessful')
+            else:
+                print('your transaction is failure')
+            print('-----------------------------------------------------------')
+        elif opt==5:
+            send_time=tt.datetime.today()
+            mobile_no=input('enter the mobile no: ')
+            send_uname=input('enter the username: ')
+            send_amount=int(input('enter the amount: '))
+            print("")
+            if (len(mobile_no)==10) and (send_uname.isalpha()):
+                print("""your UPI tranction amount : """,amount)
+                print("""sended in : """,send_time)
+                print('your UPI tranction is sucessful')
+            else:
+                print('your trancation is failed')
+            print('-----------------------------------------------------------')
+        elif opt==6:
+            mobile_no=input('enter the mobile no: ')
+            send_uname=input('enter the username: ')
+            company_name=input('enter the company name: ')
+            print("")
+            print('''call = unlimited
+                sms=100/per day
+                data=1 GB
+                plan= 209''')
+            print('''call = unlimited
+                sms=100/per day
+                data=1.5 GB
+                plan= 259''')
+            print('''call = unlimited
+                sms=100/per day
+                data=2 GB
+                plan= 350''')
+            plan=input('enter the plan: ')
+            send_amount=int(input('enter the amount: '))
+            print("")
+            if (len(mobile_no)==10) and (send_uname.isalpha()) and (company_name.isalpha()) :
+                print('your mobile recharge is done sucessfully')
+            else:
+                print('your trancation is failed')
+                print("")
+            print('--------------------------------------------------------')
+            
+        elif opt==7:
+            sys.exit('your account is logout')
+else:
+    print("""Your enter the worng details 
+              please enter the correct details""")
